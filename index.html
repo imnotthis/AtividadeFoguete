@@ -10,7 +10,8 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background-image: linear-gradient(0deg,lightblue,rgb(45, 135, 219));
+            background-image: url(fundo.jpg);
+            background-size: 100%;
         }
         .foguete
         {
@@ -20,23 +21,76 @@
             top: 100vh;
             margin-top: -80px;
         }
+        .lua {
+            position: absolute;
+            left: 48%;
+            top: 15vh;
+            margin-left: -40px;
+            margin-top: -80px;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
-    <img id="foguete" src="foguete.gif" width="80px" class="foguete">
+    <img id="foguete" src="foguete.gif" width="80px" class="foguete" onclick="Comecar()">
+
+    <audio id="audio1" autoplay="">
+        <source src="contagem_regressiva.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="audio2" autoplay="">
+        <source src="lancamento_foguete.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="audio3" autoplay="">
+        <source src="problem.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="audio4" autoplay="">
+        <source src="down.mp3" type="audio/mp3">
+    </audio>
+
+    <img src="lua.jpg" width="130px" class="lua">
 </body>
 
 <script src="jquery.js"> </script>
 
 <script>
+//SOM
+function Comecar() {
+    temporizador = setTimeout(Subir, 20000)
 
+    contagem = document.getElementById('audio1');
+    contagem.play();
+
+    temporizador2 = setTimeout(Tocar2, 20000)
+    temporizador3 = setTimeout(Tocar3, 38000)
+    temporizador4 = setTimeout(Tocar4, 55000)
+}
+
+function Tocar4()
+{
+    
+    contagem = document.getElementById('audio4');
+    contagem.play();
+}
+
+function Tocar3()
+{
+    contagem = document.getElementById('audio3');
+    contagem.play();  
+}
+function Tocar2()
+{
+    contagem = document.getElementById('audio2');
+    contagem.play(); 
+}
     // Vamos pegar o tempo inicial:
     d = new Date();
     tempo_inicial = d.getTime();
 
 
-    temporizador = setTimeout(Subir,1000)
-    x = 800
+    x = 750
     y = 100
     ESQUERDA = ""
     TOPO = ""
@@ -44,8 +98,7 @@
     {
         ESQUERDA = x + "px"
         TOPO = y + "px"
-        $("#foguete").animate({left:ESQUERDA,top:TOPO},1000)
-
+        $("#foguete").animate({left:ESQUERDA,top:TOPO},18000)
         temporizador = null // Cancela a animação Subir
         temporizador = setInterval(Descer,2000)
     }
